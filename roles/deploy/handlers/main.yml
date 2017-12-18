@@ -1,0 +1,7 @@
+---
+# handlers file for deploy
+
+- name: restart
+  service:
+    name: "httpd"
+    state: restarted

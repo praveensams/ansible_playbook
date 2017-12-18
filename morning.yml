@@ -1,0 +1,33 @@
+- hosts: sam
+  become: true
+  remote_user: vagrant
+
+
+  tasks: 
+    - name: installing httpd
+      yum: 
+        name: "{{ item }}"
+        state: "installed"
+      with_items:
+        - "{{ pack }}"
+
+
+    - name: copy a content
+      copy:
+        content: | 
+                This is first class one
+        dest: /var/www/html/index.html
+      notify: service
+
+    - name: template configuration
+      template:
+        src: httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+      notify: service
+
+
+  handlers:
+    - name: service
+      service:
+        name: "httpd"
+        state: "restarted" 

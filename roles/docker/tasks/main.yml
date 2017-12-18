@@ -1,0 +1,26 @@
+---
+# tasks file for docker
+
+- name: createing locsal folder
+  file:
+    path: /sam
+    state: directory
+    mode: 0755
+
+
+- name: creating dummy content
+  copy:
+    content: | 
+        Welcome to docker sam home
+    dest: /sam/index.html
+
+- name: creating docker
+  docker:
+    name: praveen
+    image: httpd
+    state: started
+    volumes:
+      - /sam:/usr/local/apache2/htdocs/
+    ports:
+      - 80:80
+   

@@ -1,0 +1,7 @@
+- hosts: sam
+  become: true
+  remote_user: vagrant
+  gather_facts: false
+
+  roles: 
+    - yumrepo

@@ -1,0 +1,8 @@
+---
+# vars file for run
+
+play:
+  - { one: "hi", two: "bye" }
+  - { one: "hi1", two: "bye1" }
+  - { one: "hi2", two: "bye2" }
+  - { one: "hi3", two: "bye3" }

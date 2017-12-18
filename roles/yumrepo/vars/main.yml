@@ -1,0 +1,4 @@
+---
+# vars file for yumrepo
+#
+pack: ['htTpd','httpd-tool']

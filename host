@@ -1,0 +1,8 @@
+[sam]
+node01 ansible_ssh_host=192.168.33.205
+
+
+[sam:vars]
+ansible_ssh_user=vagrant
+pack=["httpd","httpd-tools"]
+portno=8080

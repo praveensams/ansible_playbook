@@ -1,0 +1,15 @@
+- name: play block
+  block:
+    - name: yum install
+      yum: 
+        name: "{{ item }}"
+        state: "installed"
+
+  rescue: 
+    - name: packs install
+      yum:
+        name: "{{ item | lower }}"
+        state: "installed"
+ 
+  with_items:
+    - "{{ pack }}"

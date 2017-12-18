@@ -1,0 +1,4 @@
+---
+# vars file for mysql
+pack: ["mariadb-server","mariadb-devel","MySQL-python"]
+

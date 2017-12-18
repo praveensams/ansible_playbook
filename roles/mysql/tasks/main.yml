@@ -1,0 +1,24 @@
+---
+# tasks file for mysql
+- name: Install package
+  yum: 
+    name: "{{item}}"
+    state: "installed"
+  with_items:
+    - "{{ pack }}"
+  ignore_errors: yes
+  notify: "start"
+
+- name: started
+  service:
+    name: "mariadb"
+    state: "started"
+
+- name: user creation
+  mysql_user:
+    name: "user"
+    password: "pass"
+    priv: '*.*:ALL,GRANT'
+    state: "present"
+
+

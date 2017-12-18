@@ -1,0 +1,17 @@
+---
+# tasks file for resque
+#
+- name: solve
+  block:
+    - name: praveen
+      yum:
+        name: praveen
+        state: installed
+
+  rescue:
+    - name: findin
+      debug: msg="praveen running"    
+
+  always:
+    - name: run me again
+      debug: msg="sssddd"

@@ -1,0 +1,32 @@
+---
+# tasks file for deploy
+
+- name: installing httpd
+  yum:
+    name: "{{ item }}"
+    state: "installed"
+  with_items:
+    - "{{ sam.pack }}"
+
+- name: templates
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart
+
+- name: play block
+  block:
+    - name: taste
+      debug: var="praveen"
+  when: port == 990
+
+
+- name: taking backup
+  shell: |
+       mv /var/www/html /var/www/html."`date +%H%M`"
+
+- name: downloading content
+  git:
+    repo: https://github.com/praveensams/evening.git
+    dest: /var/www/html
+

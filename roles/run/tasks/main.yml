@@ -1,0 +1,22 @@
+---
+# tasks file for run
+
+- name: test me
+  command: grep "sam" /etc/passwd
+  register: result
+  ignore_errors: yes 
+
+
+- name: check me
+  copy: 
+    content: |
+      sam in home
+    dest: /etc/sam
+  when: "'bash' in result.stdout"
+
+- name: testing the loop
+  shell: | 
+       echo "{{ item.one }}" "{{ item.two }}" >> /tmp/sam
+
+  with_items:
+    - "{{ play }}" 

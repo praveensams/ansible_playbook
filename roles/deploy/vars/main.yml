@@ -1,0 +1,5 @@
+---
+# vars file for deploy
+sam:
+  pack: ['httpd', 'httpd-devel']
+port: 9090
