@@ -1,0 +1,35 @@
+- hosts: sam
+  become: true
+  remote_user: vagrant
+  vars:
+    pack: ["httpd","httpd-tools"]
+
+  tasks:
+    - name: install httpd
+      yum:
+        name: "{{ item }}"
+        state: installed
+      with_items:
+        - "{{ pack }}"
+      when: ansible_os_family == "RedHat"
+
+    - name: "creating dummy file"
+      copy:
+        content: |
+             This is first ansible class
+        dest: /var/www/html/index.html
+      notify: service restart
+
+    - name: allow port 
+      iptables:
+        chain: INPUT
+        source: 0.0.0.0 
+        jump: ACCEPT
+    
+
+  handlers:
+    - name: service restart
+      service:
+        name: "httpd"
+        state: restarted
+ 
