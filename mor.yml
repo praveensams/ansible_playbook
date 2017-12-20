@@ -1,0 +1,6 @@
+- hosts: sam
+  become: true
+  remote_user: vagrant
+
+  roles:
+    - apache

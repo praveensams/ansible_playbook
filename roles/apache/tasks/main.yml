@@ -1,0 +1,50 @@
+---
+# tasks file for apache
+
+- name: cheking platform
+  shell: |
+       uname -a
+  register: results
+  tags: "install"
+
+- name: installing package
+  yum:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items:
+    - "{{ pack }}"
+  when: "'Linx' in results.stdout "
+  tags: "install"
+
+- name: copying files 
+  file: 
+    src: "{{ role_path }}/files/index.html"
+    dest: /var/www/html/index.html
+  tags: "install"
+
+- name: replacing the content
+  lineinfile:
+    path: /var/www/html/index.html
+    regexp: 'hi*'
+    line: 'byeeeee'
+
+- name: conf file 
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: 
+    - service
+
+
+- name: allow port
+  iptables:
+    chain: INPUT
+    source: 0.0.0.0
+    jump: ACCEPT
+
+    
+ 
+
+    
+
+

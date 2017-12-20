@@ -1,0 +1,8 @@
+---
+# vars file for apache
+#
+pack:
+  - { name: "httpd", state: "installed" }
+  - { name: "httpd-tools", state: "installed" }
+
+ports: 8080
